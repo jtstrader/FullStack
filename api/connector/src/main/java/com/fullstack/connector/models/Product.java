@@ -10,7 +10,7 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long product_id;
-    
+
     String product_name;
     Integer amount_in_stock;
     Float cost;
