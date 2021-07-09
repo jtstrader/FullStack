@@ -5,8 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-// Angular Material Modules
-import { MatCard, MatCardModule } from '@angular/material/card';
+// Angular Material and Others
+import { MatCardModule } from '@angular/material/card';
+import { NgxGaugeModule } from 'ngx-gauge';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+
+// Components
 import { AboutComponent } from './about/about.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { WelcomeComponent } from './welcome/welcome.component';
@@ -24,7 +28,9 @@ import { InformationComponent } from './information/information.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatCardModule
+    MatCardModule,
+    NgxGaugeModule,
+    NgxChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
