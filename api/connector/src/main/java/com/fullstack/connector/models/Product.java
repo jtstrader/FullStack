@@ -1,7 +1,16 @@
 package com.fullstack.connector.models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity(name = "products")
 public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long product_id;
+    
     String product_name;
     Integer amount_in_stock;
     Float cost;
