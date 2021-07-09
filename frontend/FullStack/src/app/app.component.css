@@ -1,0 +1,50 @@
+.background {
+    width: 100%;
+    height: 100%;
+
+    background: url("../assets/lines.png");
+    background-size: cover;    
+}
+
+.banner {
+    /* banner */
+    width: 100%;
+    height: 50px;
+    background-color: crimson;
+    
+    /* flex styling */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.banner .header {
+    color: white;
+    padding-left: 20px;
+    padding-right: 10px;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.banner .header:hover {
+    color: orange;
+    cursor: pointer;
+}
+
+.banner li {
+    color: gainsboro;
+    padding-left: 10px;
+    padding-right: 10px;
+    list-style: none;
+    font-size: 20px;
+}
+
+.banner li:hover {
+    color: orange;
+    cursor: pointer;
+}
+
+.banner a {
+    text-decoration: none;
+    color: inherit;
+}
