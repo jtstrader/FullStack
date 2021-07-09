@@ -1,0 +1,2 @@
+# Full Stack App Backend -- Postgres
+This testing application uses postgres as the database. The connection made between the database and the frontend is through Spring Boot and Spring JPA. Run create_tables.sql and insert_data.sql in psql in order to initialize the postgres database.
