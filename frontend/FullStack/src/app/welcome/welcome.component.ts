@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MAT_RIPPLE_GLOBAL_OPTIONS } from '@angular/material/core';
+import { Subscription } from 'rxjs';
+import { IProduct } from '../interfaces/iproduct';
+import { ProductService } from '../services/product.service';
 
 @Component({
   selector: 'app-welcome',
@@ -94,8 +97,12 @@ export class WelcomeComponent implements OnInit {
     domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
   };
 
-  constructor() { }
+  constructor(private productService: ProductService) { }
 
+  sub!: Subscription;
+  errorMessage: string | undefined;
+  plist: IProduct[] | undefined;
+  
   // failure rate gauge (ACME)
   acme_gaugeValue = 72;
   acme_gaugeLabel = "ACME Failure Rate";
