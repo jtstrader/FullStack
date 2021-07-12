@@ -8,8 +8,13 @@ CREATE TABLE products
 
 CREATE TABLE sales
 (
-    id SERIAL PRIMARY KEY,
-    product_id integer NOT NULL,
-    sale_year YEAR NOT NULL,
+    sales_id SERIAL PRIMARY KEY,
+    sale_year DATE NOT NULL,
     total_sales integer NOT NULL
+);
+
+CREATE TABLE product_sales
+(
+    product_id INTEGER,
+    sales_id INTEGER
 );
