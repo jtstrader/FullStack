@@ -2,10 +2,8 @@ package com.fullstack.connector.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "products")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -17,6 +15,13 @@ public class Product {
     String product_name;
     Integer amount_in_stock;
     Float cost;
+
+    @ManyToMany
+    @JoinTable(
+            name = "product_sales",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "sales_id"))
+    private List<Sale> sales;
 
     public Product() {
     }
@@ -52,4 +57,13 @@ public class Product {
     public void setCost(Float cost) {
         this.cost = cost;
     }
+
+    public List<Sale> getSales() {
+        return sales;
+    }
+
+    public void setSales(List<Sale> sales) {
+        this.sales = sales;
+    }
+
 }

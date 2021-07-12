@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/products")
+@CrossOrigin
 public class ProductsController {
     @Autowired
     private ProductsRepository productsRepository;
