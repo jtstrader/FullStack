@@ -1,60 +1,66 @@
-<div class="top-container">
-    <!-- failure gauges that are totally not fabricated for better PR -->
-    <mat-card class="wide-short-card mat-elevation-z20">
-        <mat-card-title class="card-header">ACME vs. HoleBoat Product Fail %</mat-card-title>
-        <div id="fail-gauges">
-            <ngx-gauge class="fail-gauge"
-                    type="arch"
-                    [value]="acme_gaugeValue"
-                    [label]="acme_gaugeLabel"
-                    [append]="acme_gaugeAppendText"
-                    [thick]="acme_gaugeThickness"
-                    [foregroundColor]='acme_color'>
-            </ngx-gauge>
-            <ngx-gauge class="fail-gauge"
-                    type="arch"
-                    [value]="hb_gaugeValue"
-                    [label]="hb_gaugeLabel"
-                    [append]="hb_gaugeAppendText"
-                    [thick]="hb_gaugeThickness"
-                    [foregroundColor]='hb_color'>
-            </ngx-gauge>
-        </div>
-        <mat-card-footer style="font-style: italic;">Obtained by StewCo representative Rornale Karantducha</mat-card-footer>
-    </mat-card>
+<div class="main-container">
+    <div class="top-container">
+        <!-- failure gauges that are totally not fabricated for better PR -->
+        <mat-card class="wide-short-card mat-elevation-z20">
+            <mat-card-title class="card-header">ACME vs. HoleBoat Product Fail %</mat-card-title>
+            <div id="fail-gauges">
+                <ngx-gauge class="fail-gauge"
+                        type="arch"
+                        [value]="acme_gaugeValue"
+                        [label]="acme_gaugeLabel"
+                        [append]="acme_gaugeAppendText"
+                        [thick]="acme_gaugeThickness"
+                        [foregroundColor]='acme_color'>
+                </ngx-gauge>
+                <ngx-gauge class="fail-gauge"
+                        type="arch"
+                        [value]="hb_gaugeValue"
+                        [label]="hb_gaugeLabel"
+                        [append]="hb_gaugeAppendText"
+                        [thick]="hb_gaugeThickness"
+                        [foregroundColor]='hb_color'>
+                </ngx-gauge>
+            </div>
+            <mat-card-footer style="font-style: italic;">Obtained by StewCo representative Rornale Karantducha</mat-card-footer>
+        </mat-card>
 
-    <mat-card class="wide-long-card mat-elevation-z20">
-        <mat-card-title class="card-header">Major News! ACME Now 22% Under HoleBoat Fail %!</mat-card-title>
-            <mat-card-content>
-                <p>
-                    That's right folks. According to the graph to the left, you can see what's happened. Pulled directly from our databases, our senior analyst Rornale Karantducha found
-                    that ACME has become 22% more secure and consistent than HoleBoat.
-                </p>
-                <p style="font-style: italic;">
-                    "It was insane," <span style="font-style: normal;">Karantducha said. </span>" I've never seen a difference that large in competing businesses like this before... it's... it's a showing that ACME really does have the people's back."
-                </p>
-                <p>
-                    Statistics show that HoleBoat is growing unrestful due to ACME's massive presence in the business world. An underdog shaping into a championing angel of capitalism and free will,
-                    what will ACME tackle next? Will it reach new heights, break even more records? And will HoleBoat be able to survive the onslaught?
-                </p>
-            </mat-card-content>
-        <mat-card-footer style="font-style: italic;">Article by James Shraner from The Washing's Fun Host</mat-card-footer>
-    </mat-card>
+        <mat-card class="wide-long-card mat-elevation-z20">
+            <mat-card-title class="card-header">Major News! ACME Now 22% Under HoleBoat Fail %!</mat-card-title>
+                <mat-card-content>
+                    <p>
+                        That's right folks. According to the graph to the left, you can see what's happened. Pulled directly from our databases, our senior analyst Rornale Karantducha found
+                        that ACME has become 22% more secure and consistent than HoleBoat.
+                    </p>
+                    <p style="font-style: italic;">
+                        "It was insane," <span style="font-style: normal;">Karantducha said. </span>" I've never seen a difference that large in competing businesses like this before... it's... it's a showing that ACME really does have the people's back."
+                    </p>
+                    <p>
+                        Statistics show that HoleBoat is growing unrestful due to ACME's massive presence in the business world. An underdog shaping into a championing angel of capitalism and free will,
+                        what will ACME tackle next? Will it reach new heights, break even more records? And will HoleBoat be able to survive the onslaught?
+                    </p>
+                </mat-card-content>
+            <mat-card-footer style="font-style: italic;">Article by James Shraner from The Washing's Fun Host</mat-card-footer>
+        </mat-card>
+    </div>
+    <div class="mid-container">
+        <mat-card class="huge-long-card mat-elevation-z20">
+            <ngx-charts-line-chart *ngIf="plist"
+                [view]="view"
+                [scheme]="colorScheme"
+                [legend]="legend"
+                [showXAxisLabel]="showXAxisLabel"
+                [showYAxisLabel]="showYAxisLabel"
+                [xAxis]="xAxis"
+                [yAxis]="yAxis"
+                [xAxisLabel]="xAxisLabel"
+                [yAxisLabel]="yAxisLabel"
+                [results]="chartData"
+                >
+            </ngx-charts-line-chart>
+        </mat-card>
+    </div>
 </div>
 
 <!-- middle div -->
 
-<ngx-charts-line-chart
-  [view]="view"
-  [scheme]="colorScheme"
-  [legend]="legend"
-  [showXAxisLabel]="showXAxisLabel"
-  [showYAxisLabel]="showYAxisLabel"
-  [xAxis]="xAxis"
-  [yAxis]="yAxis"
-  [xAxisLabel]="xAxisLabel"
-  [yAxisLabel]="yAxisLabel"
-  [timeline]="timeline"
-  [results]="multi"
-  >
-</ngx-charts-line-chart>
+

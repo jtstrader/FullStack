@@ -1,4 +1,18 @@
+.main-container {
+    display: flex;
+    flex-direction: column;
+}
+
 .top-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: calc(100%-20px);
+    height: calc(100%-20px);
+    margin: 3%;
+    justify-content: center;
+}
+
+.mid-container {
     display: flex;
     flex-wrap: wrap;
     width: calc(100%-20px);
@@ -42,6 +56,12 @@ mat-card-footer {
     justify-content: space-between;
     width: 835px;
     height: 250px;
+}
+
+.huge-long-card {
+    display: flex;
+    width: 835px;
+    height: 300px;
 }
 
 .thin-tall-card {
