@@ -19,6 +19,7 @@ export class ProductService {
     )
   }
 
+  // api/v1/products/:id
   getProduct(id: number): Observable<IProduct> {
     return this.http.get<IProduct>(`http://localhost:8080/api/v1/products/{id}`).pipe(
       tap(data => console.log('All: ', JSON.stringify(data))),

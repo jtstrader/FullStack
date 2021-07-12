@@ -25,9 +25,4 @@ export class ProductListComponent implements OnInit {
       error: err => this.errorMessage = err
     });
   }
-
-  log(): void {
-    if(this.plist != undefined)
-    console.log(this.plist[0].sales[0].total_sales);
-  }
 }
