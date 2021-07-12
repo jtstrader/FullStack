@@ -1,0 +1,10 @@
+--Things Needed--
+
+--Products--
+1. Cost of Production (might not be needed -- think on it)
+2. Cost of Distribution (importing/purchasing -- cost to company)
+3. Cost of Obtainment (technically cost of distribution -- purchase to get item)
+4. Retail Price (cost)
+5. Revenue (total units sold * retail price)
+6. Profit (Revenue - cost of obtainment)
+
