@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 // Angular Material and Others
 import { MatCardModule } from '@angular/material/card';
@@ -30,7 +31,8 @@ import { InformationComponent } from './information/information.component';
     BrowserAnimationsModule,
     MatCardModule,
     NgxGaugeModule,
-    NgxChartsModule
+    NgxChartsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
