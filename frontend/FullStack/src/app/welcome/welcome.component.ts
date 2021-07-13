@@ -14,10 +14,17 @@ import { mean, std } from 'mathjs';
 })
 export class WelcomeComponent implements OnInit {
 
-  multi = [];
-  view: [number, number] = [835, 350];
+  constructor(private productService: ProductService) { }
 
-  // options
+  sub!: Subscription;
+  errorMessage: string | undefined;
+  plist: IProduct[] | undefined;
+
+  /////////////////////////////////////////////////////////////////////////////
+  // ACME's Top 3 Best Sellers!
+  // line chart options
+  chartData: IGraphData[] = [];
+  view: [number, number] = [835, 350];
   legend: boolean = true;
   showLabels: boolean = true;
   animations: boolean = true;
@@ -26,14 +33,17 @@ export class WelcomeComponent implements OnInit {
   showYAxisLabel: boolean = true;
   showXAxisLabel: boolean = true;
   xAxisLabel: string = 'Year';
-  yAxisLabel: string = 'Sales';
-  timeline: boolean = true;
-  autoScale: boolean = true;
+  yAxisLabel: string = 'Units Sold';
+  yScaleMin!: number;
+  yScaleMax!: number;
 
   colorScheme = {
     domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
   };
-  
+  /////////////////////////////////////////////////////////////////////////////
+
+  /////////////////////////////////////////////////////////////////////////////
+  // Gauges
   // failure rate gauge (ACME)
   acme_gaugeValue = 72;
   acme_gaugeLabel = "ACME Failure Rate";
@@ -47,14 +57,8 @@ export class WelcomeComponent implements OnInit {
   hb_gaugeAppendText = "%";
   hb_gaugeThickness = 8;
   hb_color = 'red';
-
-  constructor(private productService: ProductService) { }
-
-  sub!: Subscription;
-  errorMessage: string | undefined;
-  plist: IProduct[] | undefined;
-
-  chartData: IGraphData[] = [];
+  /////////////////////////////////////////////////////////////////////////////
+  
 
   ngOnInit(): void {
     this.sub = this.productService.getProductList().subscribe({
@@ -85,6 +89,7 @@ export class WelcomeComponent implements OnInit {
       this.chartData.push(JSON.parse(JSON.stringify(dataSet)));
     }
     this.filter_data();
+    this.setScale();
   }
 
   // sort through data and find items with highest profit
@@ -129,5 +134,20 @@ export class WelcomeComponent implements OnInit {
       setMean = mean(numset);
     }
     return setMean;
+  }
+
+  // set the min and max y-axis values for items going into the graph to make it more readable
+  setScale(): void {
+    let minValue: number = this.chartData[0].series[0].value;
+    let maxValue: number = this.chartData[0].series[0].value;
+    for(let i=0; i<this.chartData.length; i++) {
+      for(let j=0; j<this.chartData[i].series.length; j++) {
+        if(i==0) continue; // skip first value of entire set
+        if(minValue > this.chartData[i].series[j].value) minValue = this.chartData[i].series[j].value;
+        if(maxValue < this.chartData[i].series[j].value) maxValue = this.chartData[i].series[j].value;
+      }
+    }
+    this.yScaleMax = (maxValue + maxValue/7);
+    this.yScaleMin = (minValue - minValue/7);
   }
 }
