@@ -15,7 +15,7 @@ export class GraphDataParsingService {
   // BETTER TO USE SPECIFIC QUERIES THAT RETURN RELEVANT DATA!!!
 
   // obtain chart data from product list
-  data_get(in_plist: IProduct[], type: string): IGraphData[] {
+  data_get(in_plist: IProduct[], type: string, invert: boolean, splice: number = -1): IGraphData[] {
     let chartData: IGraphData[] = [];
     let dataSet: IGraphData = {"name": "", "series": []};
     let series: IGraphSeriesData = {"name": "", "value": 0};
@@ -42,7 +42,7 @@ export class GraphDataParsingService {
       }
       chartData.push(JSON.parse(JSON.stringify(dataSet)));
     }
-    chartData = this.filter_data(chartData);
+    chartData = this.filter_data(chartData, invert, splice);
     
     return chartData;
   }
@@ -63,14 +63,14 @@ export class GraphDataParsingService {
     if(invert)
       var sortedMap = new Map([...dataMap].sort().reverse());
     else
-    var sortedMap = new Map([...dataMap].sort());
+      var sortedMap = new Map([...dataMap].sort());
 
     if(splice>0) {
       const iterator = sortedMap.values();
       // iterate "splice" times, these are the top/bottom "splice" values depending on sort order
       // set values into new IGraphData and overwrite old IGraphData object
       let newGSet: IGraphData[] = [];
-      for(let i=0; i<3; i++) {
+      for(let i=0; i<splice; i++) {
         newGSet.push(chartData[parseInt(iterator.next().value)]);
       }
       chartData = newGSet;
@@ -100,7 +100,7 @@ export class GraphDataParsingService {
   }
 
   // set the min and max y-axis values for items going into the graph to make it more readable
-  setScale(chartData: IGraphData[]): void {
+  getScale(chartData: IGraphData[]): number[] {
     let minValue: number = chartData[0].series[0].value;
     let maxValue: number = chartData[0].series[0].value;
     for(let i=0; i<chartData.length; i++) {
@@ -110,7 +110,7 @@ export class GraphDataParsingService {
         if(maxValue < chartData[i].series[j].value) maxValue = chartData[i].series[j].value;
       }
     }
-    this.yScaleMax = (maxValue + maxValue/7);
-    this.yScaleMin = (minValue - minValue/7);
+    // max, min
+    return [(maxValue + maxValue/7), (minValue - minValue/7)];
   }
 }
