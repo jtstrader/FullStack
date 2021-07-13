@@ -5,6 +5,7 @@ import { IGraphData } from '../interfaces/igraph-data';
 import { IGraphSeriesData } from '../interfaces/igraph-series-data';
 import { IProduct } from '../interfaces/iproduct';
 import { ProductService } from '../services/product.service';
+import { mean, std } from 'mathjs';
 
 @Component({
   selector: 'app-welcome',
@@ -90,11 +91,11 @@ export class WelcomeComponent implements OnInit {
     // go through chartData array and find 3 data sets with highest value
     const dataMap = new Map();
     for(let i=0; i<this.chartData.length; i++) {
-      let sum: number = 0;
+      let numset: number[] = [];
       for(let j=0; j<this.chartData[i].series.length; j++) {
-        sum += this.chartData[i].series[j].value;
+        numset.push(this.chartData[i].series[j].value);
       }
-      dataMap.set(sum/this.chartData[i].series.length, i); // calculate mean
+      dataMap.set(this.adjust_mean(numset), i); // calculate mean
     }
     var sortedMap = new Map([...dataMap].sort().reverse());
     const iterator = sortedMap.values();
@@ -109,5 +110,25 @@ export class WelcomeComponent implements OnInit {
     console.log(newGSet);
 
     this.chartData = newGSet;
+  }
+
+  adjust_mean(numset: number[]): number {
+    // return mean if set contains more than the allowed amount of outliers
+    // otherwise, adjust data set to try and more accurately represent data set
+    let setMean: number = mean(numset);
+    let setSigma: number = std(numset);
+    let outlierIndex = -1;
+    for(let i=0; i<numset.length; i++) {
+      if((numset[i] > (setMean+3*setSigma) || numset[i] < (setMean-3*setSigma)) && outlierIndex == -1)
+        outlierIndex = i;
+      else if((numset[i] > (setMean+3*setSigma) || numset[i] < (setMean-3*setSigma)))
+        return setMean;
+    }
+    if(outlierIndex != -1) {
+      // adjust set by removing damning outlier
+      numset.splice(outlierIndex, 1); // remove outlier
+      setMean = mean(numset);
+    }
+    return setMean;
   }
 }
