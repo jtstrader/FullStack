@@ -1,0 +1,16 @@
+<div class="main-container">
+    <mat-card class="large-pie-chart mat-elevation-z20">
+        <mat-card-title>
+            Global Product Stats: {{type}}
+        </mat-card-title>
+        <ngx-charts-pie-chart
+            [results]="pieData"
+            [scheme]="colorScheme"
+            [labels]="showLabels"
+            [legend]="legend"
+            [legendPosition]="legendPosition"
+            [gradient]="gradient"
+            >
+        </ngx-charts-pie-chart>
+    </mat-card>
+</div>

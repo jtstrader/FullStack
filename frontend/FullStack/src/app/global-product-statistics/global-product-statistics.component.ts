@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { LegendPosition } from '@swimlane/ngx-charts';
 import { Subscription } from 'rxjs';
-import { IGraphData } from '../interfaces/igraph-data';
+import { IPieChartData } from '../interfaces/GraphDataInterfaces/ipie-chart-data';
 import { IProduct } from '../interfaces/iproduct';
 import { GraphDataParsingService } from '../services/graph-data-parsing.service';
 import { ProductService } from '../services/product.service';
@@ -18,14 +19,27 @@ export class GlobalProductStatisticsComponent implements OnInit {
   sub!: Subscription;
   plist!: IProduct[];
   errorMessage!: string;
+  type: string = "Units Sold"
 
-  chartData: IGraphData[] = [];
+  // pie chart data
+  pieData: IPieChartData[] = [];
+  view: [number, number] = [835, 350];
+  legend: boolean = true;
+  showLabels: boolean = false;
+  animations: boolean = true;
+  gradient: boolean = false;
+
+  legendPosition: LegendPosition = LegendPosition.Right;
+
+  colorScheme = {
+    domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
+  };
 
   ngOnInit(): void {
     this.sub = this.productService.getProductList().subscribe({
       next: plist => {
         this.plist = plist; 
-        this.chartData = this.gdParser.data_get(this.plist, "units_sold", false)
+        this.pieData = this.gdParser.pie_chart_data_get(this.plist, "units_sold", true, 14)
       },
       error: err => this.errorMessage = err
     });
