@@ -14,16 +14,13 @@ public class Product {
 
     String product_name;
     Integer amount_in_stock;
-    Float production_cost;
-    Float distribution_cost;
-    Float retail_price;
 
     @ManyToMany
     @JoinTable(
-            name = "product_sales",
+            name = "product_year_join",
             joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "sales_id"))
-    private List<Sale> sales;
+            inverseJoinColumns = @JoinColumn(name = "year_id"))
+    private List<ProductYearlyData> productYearlyData;
 
     public Product() {
     }
@@ -52,36 +49,11 @@ public class Product {
         this.amount_in_stock = amount_in_stock;
     }
 
-    public Float getProduction_cost() {
-        return production_cost;
+    public List<ProductYearlyData> getProductYearlyData() {
+        return productYearlyData;
     }
 
-    public void setProduction_cost(Float production_cost) {
-        this.production_cost = production_cost;
+    public void setProductYearlyData(List<ProductYearlyData> productYearlyData) {
+        this.productYearlyData = productYearlyData;
     }
-
-    public Float getDistribution_cost() {
-        return distribution_cost;
-    }
-
-    public void setDistribution_cost(Float distribution_cost) {
-        this.distribution_cost = distribution_cost;
-    }
-
-    public Float getRetail_price() {
-        return retail_price;
-    }
-
-    public void setRetail_price(Float retail_price) {
-        this.retail_price = retail_price;
-    }
-
-    public List<Sale> getSales() {
-        return sales;
-    }
-
-    public void setSales(List<Sale> sales) {
-        this.sales = sales;
-    }
-
 }

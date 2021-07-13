@@ -38,15 +38,15 @@ int main() {
     srand(time(NULL));
 
     // ctsql
-    ctsql_out+=std::string("DROP TABLE IF EXISTS products;\nDROP TABLE IF EXISTS sales;\nDROP TABLE IF EXISTS product_sales;\n\n");
+    ctsql_out+=std::string("DROP TABLE IF EXISTS products;\nDROP TABLE IF EXISTS products_yearly_data;\nDROP TABLE IF EXISTS product_year_join;\n\n");
     ctsql_out+=std::string("CREATE TABLE products(product_id SERIAL PRIMARY KEY, product_name varchar(50) NOT NULL, amount_in_stock integer NOT NULL);\n")+
-               std::string("CREATE TABLE products_yearly_data(sales_id SERIAL PRIMARY KEY, year DATE NOT NULL, units_sold INTEGER NOT NULL, production_cost float NOT NULL, distribution_cost float NOT NULL, retail_price float NOT NULL);\n")+
-               std::string("CREATE TABLE product_sales(product_id INTEGER NOT NULL, sales_id INTEGER NOT NULL);");
+               std::string("CREATE TABLE products_yearly_data(year_id SERIAL PRIMARY KEY, year DATE NOT NULL, units_sold INTEGER NOT NULL, production_cost float NOT NULL, distribution_cost float NOT NULL, retail_price float NOT NULL);\n")+
+               std::string("CREATE TABLE product_year_join(product_id INTEGER NOT NULL, year_id INTEGER NOT NULL);");
     ctsql<<ctsql_out;
 
     // idsql
     // value required for every table. product names/id are hard coded. most else is random.
-    idsql_out+=std::string("INSERT INTO products(product_id, product_name, amount_in_stock, production_cost, distribution_cost, retail_price)\nVALUES\n");
+    idsql_out+=std::string("INSERT INTO products(product_id, product_name, amount_in_stock)\nVALUES\n");
     std::vector<std::string> products; std::string pname;
     std::fstream products_in("products.dat", std::ios::in);
     while(getline(products_in, pname))
@@ -57,7 +57,7 @@ int main() {
         // create random value for product_cost (pc), distribution_cost (dc), and retail price(rp)
         int stock = rand() % 1000000 + 1;        
         // product information gathered, create query
-        idsql_out+=std::string("\t("+std::to_string(i)+", '"+products[i-1]+"', "+std::to_string(stock)+", "+pc_s+", "+dc_s+", "+rp_s+")");
+        idsql_out+=std::string("\t("+std::to_string(i)+", '"+products[i-1]+"', "+std::to_string(stock)+")");
         if(i < products.size())
             idsql_out+=",\n";
         else
@@ -65,8 +65,8 @@ int main() {
         
     }
 
-    idsql_out+=std::string("INSERT INTO sales(sales_id, year, units_sold)\nVALUES\n");
-    // sales table completion
+    idsql_out+=std::string("INSERT INTO products_yearly_data(year_id, year, units_sold, production_cost, distribution_cost, retail_price)\nVALUES\n");
+    // products_yearly_data table completion
     const int START_YEAR = 1990;
     for(int i=0; i<products.size(); i++) {
         for(int j=START_YEAR; j<START_YEAR+YEARS_OBSERVED; j++) {
@@ -76,7 +76,8 @@ int main() {
             dc = genRandom(0, 100); while(dc<pc) dc+=(pc/4); dc_s = roundTwoDecToString(dc);
             rp = genRandom(0, 100); while(rp<dc) rp+=(dc/4); rp_s = roundTwoDecToString(rp);
 
-            idsql_out+=std::string("\t("+std::to_string(YEARS_OBSERVED*i+(j-START_YEAR)+1)+", TO_DATE('"+std::to_string(j)+"', 'YYYY'), "+std::to_string(units_sold)+")");
+            idsql_out+=std::string("\t("+std::to_string(YEARS_OBSERVED*i+(j-START_YEAR)+1)+", TO_DATE('"+std::to_string(j)+"', 'YYYY'), ")+
+                       std::string(std::to_string(units_sold)+", "+pc_s+", "+dc_s+", "+rp_s+")");
             if(j == START_YEAR+YEARS_OBSERVED-1 && i == products.size()-1)
                 idsql_out+=";\n";
             else
@@ -84,8 +85,8 @@ int main() {
         }
     }
 
-    idsql_out+=std::string("INSERT INTO product_sales(product_id, sales_id)\nVALUES\n");
-    // product_sales join table completion
+    idsql_out+=std::string("INSERT INTO product_year_join(product_id, year_id)\nVALUES\n");
+    // product_year_join join table completion
     for(int i=1, id=0; i<=products.size()*YEARS_OBSERVED; i++) {
         if((i-1) % YEARS_OBSERVED == 0)
             id++;
