@@ -81,9 +81,9 @@ export class WelcomeComponent implements OnInit {
       dataSet.name = this.plist[i].product_name;
       
       // loop through series (each individual sale)
-      for(let j=0; j<this.plist[i].sales.length; j++) {
-        series.name = this.plist[i].sales[j].sale_year.substr(0, 4);
-        series.value = this.plist[i].sales[j].units_sold;
+      for(let j=0; j<this.plist[i].productYearlyData.length; j++) {
+        series.name = this.plist[i].productYearlyData[j].year.substr(0, 4);
+        series.value = this.plist[i].productYearlyData[j].units_sold;
         dataSet.series.push(JSON.parse(JSON.stringify(series)));
       }
       this.chartData.push(JSON.parse(JSON.stringify(dataSet)));

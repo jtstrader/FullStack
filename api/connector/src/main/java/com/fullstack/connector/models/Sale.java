@@ -14,7 +14,7 @@ public class Sale {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long sales_id;
 
-    Date sale_year;
+    Date year;
     Long units_sold;
 
     @ManyToMany(mappedBy = "sales")
@@ -32,12 +32,12 @@ public class Sale {
         this.sales_id = sales_id;
     }
 
-    public Date getSale_year() {
-        return sale_year;
+    public Date getyear() {
+        return year;
     }
 
-    public void setSale_year(Date sale_year) {
-        this.sale_year = sale_year;
+    public void setyear(Date year) {
+        this.year = year;
     }
 
     public Long getUnits_sold() {

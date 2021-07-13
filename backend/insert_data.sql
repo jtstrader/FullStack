@@ -27,7 +27,7 @@ VALUES
 	(25, 'Notepad--', 466017, 95.39, 98.72, 110.39),
 	(26, 'Eaten Wizard Hat', 187251, 6.51, 69.09, 84.52),
 	(27, 'Wizard Lizard ', 628681, 59.95, 89.62, 103.08);
-INSERT INTO sales(sales_id, sale_year, units_sold)
+INSERT INTO sales(sales_id, year, units_sold)
 VALUES
 	(1, TO_DATE('1990', 'YYYY'), 979485),
 	(2, TO_DATE('1991', 'YYYY'), 971620),

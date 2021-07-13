@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { IProduct } from '../interfaces/iproduct';
+import { ProductService } from '../services/product.service';
 
 @Component({
   selector: 'app-global-product-statistics',
@@ -7,9 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GlobalProductStatisticsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private productService: ProductService) { }
+
+  sub!: Subscription;
+  plist!: IProduct[];
+  errorMessage!: string;
 
   ngOnInit(): void {
+    this.sub = this.productService.getProductList().subscribe({
+      next
+    });
   }
 
 }

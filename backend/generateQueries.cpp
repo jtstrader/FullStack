@@ -39,8 +39,8 @@ int main() {
 
     // ctsql
     ctsql_out+=std::string("DROP TABLE IF EXISTS products;\nDROP TABLE IF EXISTS sales;\nDROP TABLE IF EXISTS product_sales;\n\n");
-    ctsql_out+=std::string("CREATE TABLE products(product_id SERIAL PRIMARY KEY, product_name varchar(50) NOT NULL, amount_in_stock integer NOT NULL, production_cost float NOT NULL, distribution_cost float NOT NULL, retail_price float NOT NULL);\n")+
-               std::string("CREATE TABLE sales(sales_id SERIAL PRIMARY KEY, sale_year DATE NOT NULL, units_sold INTEGER NOT NULL);\n")+
+    ctsql_out+=std::string("CREATE TABLE products(product_id SERIAL PRIMARY KEY, product_name varchar(50) NOT NULL, amount_in_stock integer NOT NULL);\n")+
+               std::string("CREATE TABLE products_yearly_data(sales_id SERIAL PRIMARY KEY, year DATE NOT NULL, units_sold INTEGER NOT NULL, production_cost float NOT NULL, distribution_cost float NOT NULL, retail_price float NOT NULL);\n")+
                std::string("CREATE TABLE product_sales(product_id INTEGER NOT NULL, sales_id INTEGER NOT NULL);");
     ctsql<<ctsql_out;
 
@@ -55,12 +55,7 @@ int main() {
     // products table completion
     for(int i=1; i<=products.size(); i++) {
         // create random value for product_cost (pc), distribution_cost (dc), and retail price(rp)
-        int stock = rand() % 1000000 + 1;
-        float pc, dc, rp; std::string pc_s, dc_s, rp_s;
-        pc = genRandom(0, 100); pc_s = roundTwoDecToString(pc);
-        dc = genRandom(0, 100); while(dc<pc) dc+=(pc/4); dc_s = roundTwoDecToString(dc);
-        rp = genRandom(0, 100); while(rp<dc) rp+=(dc/4); rp_s = roundTwoDecToString(rp);
-        
+        int stock = rand() % 1000000 + 1;        
         // product information gathered, create query
         idsql_out+=std::string("\t("+std::to_string(i)+", '"+products[i-1]+"', "+std::to_string(stock)+", "+pc_s+", "+dc_s+", "+rp_s+")");
         if(i < products.size())
@@ -70,12 +65,17 @@ int main() {
         
     }
 
-    idsql_out+=std::string("INSERT INTO sales(sales_id, sale_year, units_sold)\nVALUES\n");
+    idsql_out+=std::string("INSERT INTO sales(sales_id, year, units_sold)\nVALUES\n");
     // sales table completion
     const int START_YEAR = 1990;
     for(int i=0; i<products.size(); i++) {
         for(int j=START_YEAR; j<START_YEAR+YEARS_OBSERVED; j++) {
             int units_sold = rand() % 200000 + 800000;
+            float pc, dc, rp; std::string pc_s, dc_s, rp_s;
+            pc = genRandom(0, 100); pc_s = roundTwoDecToString(pc);
+            dc = genRandom(0, 100); while(dc<pc) dc+=(pc/4); dc_s = roundTwoDecToString(dc);
+            rp = genRandom(0, 100); while(rp<dc) rp+=(dc/4); rp_s = roundTwoDecToString(rp);
+
             idsql_out+=std::string("\t("+std::to_string(YEARS_OBSERVED*i+(j-START_YEAR)+1)+", TO_DATE('"+std::to_string(j)+"', 'YYYY'), "+std::to_string(units_sold)+")");
             if(j == START_YEAR+YEARS_OBSERVED-1 && i == products.size()-1)
                 idsql_out+=";\n";
