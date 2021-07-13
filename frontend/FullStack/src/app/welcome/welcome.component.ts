@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { IGraphData } from '../interfaces/igraph-data';
-import { IGraphSeriesData } from '../interfaces/igraph-series-data';
+import { ILineGraphData } from '../interfaces/GraphDataInterfaces/iline-graph-data';
+import { ILineGraphSeriesData } from '../interfaces/GraphDataInterfaces/iline-graph-series-data';
 import { IProduct } from '../interfaces/iproduct';
 import { ProductService } from '../services/product.service';
 import { mean, std } from 'mathjs';
@@ -24,7 +24,7 @@ export class WelcomeComponent implements OnInit {
   /////////////////////////////////////////////////////////////////////////////
   // ACME's Top 3 Best Sellers!
   // line chart options
-  chartData: IGraphData[] = [];
+  chartData: ILineGraphData[] = [];
   view: [number, number] = [835, 350];
   legend: boolean = true;
   showLabels: boolean = true;
@@ -65,8 +65,8 @@ export class WelcomeComponent implements OnInit {
     this.sub = this.productService.getProductList().subscribe({
       next: plist => {
         this.plist = plist; 
-        this.chartData = this.gdParser.data_get(this.plist, "units_sold", true, 3);
-        let scaling: number[] = this.gdParser.getScale(this.chartData);
+        this.chartData = this.gdParser.line_chart_data_get(this.plist, "units_sold", true, 3);
+        let scaling: number[] = this.gdParser.line_chart_getScale(this.chartData);
         this.yScaleMax = scaling[0]; this.yScaleMin = scaling[1];
       },
       error: err => this.errorMessage = err
