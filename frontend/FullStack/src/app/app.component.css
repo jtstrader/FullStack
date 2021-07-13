@@ -48,3 +48,9 @@
     text-decoration: none;
     color: inherit;
 }
+
+.banner .separator {
+    margin-bottom: 5px;
+    color: white;
+    font-size: 24px;
+}

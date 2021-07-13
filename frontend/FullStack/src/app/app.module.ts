@@ -16,6 +16,7 @@ import { AboutComponent } from './about/about.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { InformationComponent } from './information/information.component';
+import { GlobalProductStatisticsComponent } from './global-product-statistics/global-product-statistics.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { InformationComponent } from './information/information.component';
     AboutComponent,
     ProductListComponent,
     WelcomeComponent,
-    InformationComponent
+    InformationComponent,
+    GlobalProductStatisticsComponent
   ],
   imports: [
     BrowserModule,
