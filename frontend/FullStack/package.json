@@ -22,6 +22,7 @@
     "@angular/router": "~12.1.1",
     "@swimlane/ngx-charts": "^18.0.1",
     "date-fns": "^2.22.1",
+    "mathjs": "^9.4.4",
     "ngx-gauge": "^3.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
