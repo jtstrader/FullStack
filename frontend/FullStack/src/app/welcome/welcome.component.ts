@@ -15,7 +15,7 @@ import { mean, std } from 'mathjs';
 export class WelcomeComponent implements OnInit {
 
   multi = [];
-  view: [number, number] = [835, 300];
+  view: [number, number] = [835, 350];
 
   // options
   legend: boolean = true;
@@ -78,7 +78,7 @@ export class WelcomeComponent implements OnInit {
       // loop through series (each individual sale)
       for(let j=0; j<this.plist[i].sales.length; j++) {
         series.name = this.plist[i].sales[j].sale_year.substr(0, 4);
-        series.value = this.plist[i].sales[j].total_sales;
+        series.value = this.plist[i].sales[j].units_sold;
         dataSet.series.push(JSON.parse(JSON.stringify(series)));
       }
       this.chartData.push(JSON.parse(JSON.stringify(dataSet)));
@@ -106,15 +106,13 @@ export class WelcomeComponent implements OnInit {
     for(let i=0; i<3; i++) {
       newGSet.push(this.chartData[parseInt(iterator.next().value)]);
     }
-
-    console.log(newGSet);
-
     this.chartData = newGSet;
   }
 
   adjust_mean(numset: number[]): number {
     // return mean if set contains more than the allowed amount of outliers
     // otherwise, adjust data set to try and more accurately represent data set
+    // as of now, only 1 outlier allowed!!!
     let setMean: number = mean(numset);
     let setSigma: number = std(numset);
     let outlierIndex = -1;

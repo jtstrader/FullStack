@@ -8,7 +8,7 @@
     flex-wrap: wrap;
     width: calc(100%-20px);
     height: calc(100%-20px);
-    margin: 3%;
+    margin-top: 3%;
     justify-content: center;
 }
 
@@ -17,8 +17,11 @@
     flex-wrap: wrap;
     width: calc(100%-20px);
     height: calc(100%-20px);
-    margin: 3%;
     justify-content: center;
+}
+
+mat-card-title {
+    text-align: center;
 }
 
 @media screen and (max-width: 1000px) {
@@ -60,8 +63,9 @@ mat-card-footer {
 
 .huge-long-card {
     display: flex;
+    flex-direction: column;
     width: 835px;
-    height: 300px;
+    height: 360px;
 }
 
 .thin-tall-card {

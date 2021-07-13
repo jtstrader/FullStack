@@ -42,9 +42,12 @@
             <mat-card-footer style="font-style: italic;">Article by James Shraner from The Washing's Fun Host</mat-card-footer>
         </mat-card>
     </div>
-    <div class="mid-container">
+    <div class="mid-container" *ngIf="plist">
         <mat-card class="huge-long-card mat-elevation-z20">
-            <ngx-charts-line-chart *ngIf="plist"
+            <mat-card-title>
+                ACME's Top 3 Best Sellers!
+            </mat-card-title>
+            <ngx-charts-line-chart
                 [view]="view"
                 [scheme]="colorScheme"
                 [legend]="legend"
