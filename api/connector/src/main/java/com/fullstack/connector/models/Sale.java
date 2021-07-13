@@ -15,7 +15,7 @@ public class Sale {
     Long sales_id;
 
     Date sale_year;
-    Long total_sales;
+    Long units_sold;
 
     @ManyToMany(mappedBy = "sales")
     @JsonIgnore
@@ -40,12 +40,12 @@ public class Sale {
         this.sale_year = sale_year;
     }
 
-    public Long getTotal_sales() {
-        return total_sales;
+    public Long getUnits_sold() {
+        return units_sold;
     }
 
-    public void setTotal_sales(Long total_sales) {
-        this.total_sales = total_sales;
+    public void setUnits_sold(Long units_sold) {
+        this.units_sold = units_sold;
     }
 
     public List<Product> getProducts() {

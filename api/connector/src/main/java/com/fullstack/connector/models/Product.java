@@ -14,7 +14,9 @@ public class Product {
 
     String product_name;
     Integer amount_in_stock;
-    Float cost;
+    Float production_cost;
+    Float distribution_cost;
+    Float retail_price;
 
     @ManyToMany
     @JoinTable(
@@ -50,12 +52,28 @@ public class Product {
         this.amount_in_stock = amount_in_stock;
     }
 
-    public Float getCost() {
-        return cost;
+    public Float getProduction_cost() {
+        return production_cost;
     }
 
-    public void setCost(Float cost) {
-        this.cost = cost;
+    public void setProduction_cost(Float production_cost) {
+        this.production_cost = production_cost;
+    }
+
+    public Float getDistribution_cost() {
+        return distribution_cost;
+    }
+
+    public void setDistribution_cost(Float distribution_cost) {
+        this.distribution_cost = distribution_cost;
+    }
+
+    public Float getRetail_price() {
+        return retail_price;
+    }
+
+    public void setRetail_price(Float retail_price) {
+        this.retail_price = retail_price;
     }
 
     public List<Sale> getSales() {
