@@ -19,7 +19,7 @@ import { RouterModule } from '@angular/router';
     SharedModule,
     RouterModule.forChild([
       { path: 'products', component: ProductListComponent },
-      { path: 'pinfo', component: InformationComponent },
+      { path: 'products/:id', component: InformationComponent },
       { path: 'gloprodustats', component: GlobalProductStatisticsComponent }
     ])
   ]
