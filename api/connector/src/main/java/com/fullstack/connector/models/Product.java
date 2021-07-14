@@ -13,7 +13,10 @@ public class Product {
     Long product_id;
 
     String product_name;
+    String category;
     Integer amount_in_stock;
+    Float acme_rating;
+    Float user_rating;
 
     @ManyToMany
     @JoinTable(
@@ -41,6 +44,14 @@ public class Product {
         this.product_name = product_name;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     public Integer getAmount_in_stock() {
         return amount_in_stock;
     }
@@ -55,5 +66,21 @@ public class Product {
 
     public void setProductYearlyData(List<ProductYearlyData> productYearlyData) {
         this.productYearlyData = productYearlyData;
+    }
+
+    public Float getAcme_rating() {
+        return acme_rating;
+    }
+
+    public void setAcme_rating(Float acme_rating) {
+        this.acme_rating = acme_rating;
+    }
+
+    public Float getUser_rating() {
+        return user_rating;
+    }
+
+    public void setUser_rating(Float user_rating) {
+        this.user_rating = user_rating;
     }
 }

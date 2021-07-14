@@ -39,14 +39,17 @@ int main() {
 
     // ctsql
     ctsql_out+=std::string("DROP TABLE IF EXISTS products;\nDROP TABLE IF EXISTS products_yearly_data;\nDROP TABLE IF EXISTS product_year_join;\n\n");
-    ctsql_out+=std::string("CREATE TABLE products(product_id SERIAL PRIMARY KEY, product_name varchar(50) NOT NULL, amount_in_stock integer NOT NULL);\n")+
+    ctsql_out+=std::string("CREATE TABLE products(product_id SERIAL PRIMARY KEY, product_name varchar(50) NOT NULL, category varchar(20) NOT NULL, amount_in_stock integer NOT NULL, acme_rating float NOT NULL, user_rating float);\n")+
                std::string("CREATE TABLE products_yearly_data(year_id SERIAL PRIMARY KEY, year DATE NOT NULL, units_sold INTEGER NOT NULL, production_cost float NOT NULL, distribution_cost float NOT NULL, retail_price float NOT NULL);\n")+
                std::string("CREATE TABLE product_year_join(product_id INTEGER NOT NULL, year_id INTEGER NOT NULL);");
     ctsql<<ctsql_out;
 
+    // categories
+    std::string categories[] = {"General", "Unsafe", "Holy", "Godly", "Evil", "Potato"};
+
     // idsql
     // value required for every table. product names/id are hard coded. most else is random.
-    idsql_out+=std::string("INSERT INTO products(product_id, product_name, amount_in_stock)\nVALUES\n");
+    idsql_out+=std::string("INSERT INTO products(product_id, product_name, category, amount_in_stock, acme_rating, user_rating)\nVALUES\n");
     std::vector<std::string> products; std::string pname;
     std::fstream products_in("products.dat", std::ios::in);
     while(getline(products_in, pname))
@@ -55,9 +58,10 @@ int main() {
     // products table completion
     for(int i=1; i<=products.size(); i++) {
         // create random value for product_cost (pc), distribution_cost (dc), and retail price(rp)
-        int stock = rand() % 1000000 + 1;        
+        int stock = rand() % 1000000 + 1;  
         // product information gathered, create query
-        idsql_out+=std::string("\t("+std::to_string(i)+", '"+products[i-1]+"', "+std::to_string(stock)+")");
+        idsql_out+=std::string("\t("+std::to_string(i)+", '"+products[i-1]+"', '"+categories[rand()%6]+"', "+std::to_string(stock)+", "+
+                                roundTwoDecToString(genRandom(0, 5))+", "+roundTwoDecToString(genRandom(0, 5))+")");
         if(i < products.size())
             idsql_out+=",\n";
         else
@@ -70,7 +74,8 @@ int main() {
     const int START_YEAR = 1990;
     for(int i=0; i<products.size(); i++) {
         for(int j=START_YEAR; j<START_YEAR+YEARS_OBSERVED; j++) {
-            int units_sold = rand() % 200000 + 800000;
+            int rander = rand() % 500000 + 1;
+            int units_sold = rand() % rander + rander/2;
             float pc, dc, rp; std::string pc_s, dc_s, rp_s;
             pc = genRandom(0, 100); pc_s = roundTwoDecToString(pc);
             dc = genRandom(0, 100); while(dc<pc) dc+=(pc/4); dc_s = roundTwoDecToString(dc);

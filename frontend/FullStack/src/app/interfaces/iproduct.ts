@@ -3,6 +3,9 @@ import { IProductYearlyData } from "./iproductyearlydata";
 export interface IProduct {
     product_id: number;
     product_name: string;
+    category: string;
     amount_in_stock: number;
+    acme_rating: number;
+    user_rating: number;
     productYearlyData: IProductYearlyData[];
 }
