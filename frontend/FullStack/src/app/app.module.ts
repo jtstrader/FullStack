@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 // Angular Material and Others
 import { MatCardModule } from '@angular/material/card';
@@ -36,7 +37,8 @@ import { GetLatestRetailPricePipe } from './pipes/get-latest-retail-price.pipe';
     MatCardModule,
     NgxGaugeModule,
     NgxChartsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

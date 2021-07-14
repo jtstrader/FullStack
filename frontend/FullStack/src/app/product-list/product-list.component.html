@@ -1,7 +1,12 @@
 <div class="main-container">
     <mat-card class="product-list-card mat-elevation-z20">
-        <mat-card-title>ACME INCORPORATION OFFICIAL PRODUCT LIST</mat-card-title>
-        <mat-card-content *ngFor="let product of plist">
+        <mat-card-title class="main-title">
+            ACME INCORPORATION OFFICIAL PRODUCT LIST
+        </mat-card-title>
+        <mat-card-title class="search-bar">
+            Search: <input type="text" [(ngModel)]='filter'>
+        </mat-card-title>
+        <mat-card-content *ngFor="let product of filteredPList">
             <mat-card class="product-card mat-elevation-z6">
                 <mat-card-title>{{product.product_name}}</mat-card-title>
                 <mat-card-content>

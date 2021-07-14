@@ -5,8 +5,12 @@
     top: 0; left: 0; right: 0; bottom: 0;
 }
 
-mat-card-title {
+.main-title {
     text-align: center;
+}
+
+.search-bar {
+    text-align: right;
 }
 
 .product-list-card {
@@ -23,11 +27,6 @@ mat-card-title {
     align-items: center; */
     text-align: left;
 }
-
-.product-card mat-card-title {
-    text-align: left;
-}
-
 
 @media screen and (max-width: 1000px) {
     .product-list-card {
