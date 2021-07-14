@@ -17,6 +17,7 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { InformationComponent } from './information/information.component';
 import { GlobalProductStatisticsComponent } from './global-product-statistics/global-product-statistics.component';
+import { GetLatestRetailPricePipe } from './pipes/get-latest-retail-price.pipe';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { GlobalProductStatisticsComponent } from './global-product-statistics/gl
     ProductListComponent,
     WelcomeComponent,
     InformationComponent,
-    GlobalProductStatisticsComponent
+    GlobalProductStatisticsComponent,
+    GetLatestRetailPricePipe
   ],
   imports: [
     BrowserModule,
