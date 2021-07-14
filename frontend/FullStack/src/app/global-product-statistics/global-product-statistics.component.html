@@ -1,10 +1,26 @@
-<div class="main-container">
+<div class="main-container" (document:resize)="screenSizeChanged($event)">
     <mat-card class="large-pie-chart mat-elevation-z20">
         <mat-card-title>
-            Global Product Stats: {{type}}
+            Global Product Stats: Units Sold
         </mat-card-title>
         <ngx-charts-pie-chart
-            [results]="pieData"
+            [results]="pieData_units_sold"
+            [view]="view"
+            [scheme]="colorScheme"
+            [labels]="showLabels"
+            [legend]="legend"
+            [legendPosition]="legendPosition"
+            [gradient]="gradient"
+            >
+        </ngx-charts-pie-chart>
+    </mat-card>
+    <mat-card class="large-pie-chart mat-elevation-z20">
+        <mat-card-title>
+            Global Product Stats: Profit
+        </mat-card-title>
+        <ngx-charts-pie-chart
+            [results]="pieData_profits"
+            [view]="view"
             [scheme]="colorScheme"
             [labels]="showLabels"
             [legend]="legend"

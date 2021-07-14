@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { LegendPosition } from '@swimlane/ngx-charts';
 import { Subscription } from 'rxjs';
 import { IPieChartData } from '../interfaces/GraphDataInterfaces/ipie-chart-data';
@@ -22,9 +22,10 @@ export class GlobalProductStatisticsComponent implements OnInit {
   type: string = "Units Sold"
 
   // pie chart data
-  pieData: IPieChartData[] = [];
-  view: [number, number] = [835, 350];
-  legend: boolean = true;
+  pieData_units_sold: IPieChartData[] = [];
+  pieData_profits: IPieChartData[] = [];
+  view!: [number, number];
+  legend: boolean = true
   showLabels: boolean = false;
   animations: boolean = true;
   gradient: boolean = false;
@@ -39,10 +40,28 @@ export class GlobalProductStatisticsComponent implements OnInit {
     this.sub = this.productService.getProductList().subscribe({
       next: plist => {
         this.plist = plist; 
-        this.pieData = this.gdParser.pie_chart_data_get(this.plist, "units_sold", true, 14)
+        this.pieData_units_sold = this.gdParser.pie_chart_data_get(this.plist, "units_sold", true, 5)
+        this.pieData_profits = this.gdParser.pie_chart_data_get(this.plist, "profit");
+        this.setChartSize();
       },
       error: err => this.errorMessage = err
     });
+
+    console.log();
+  }
+
+  @HostListener('window:resize', ['$event'])
+  screenSizeChanged(event: any): void {
+    let height: number = event.target.innerHeight;
+    let width: number = event.target.innerWidth;
+    this.legend = ( (height  > 500) && (width > 1500) );
+    this.setChartSize();
+  }
+
+  setChartSize(): void {
+    let pieChartProperties: any = document.querySelector('.large-pie-chart');
+    let style = getComputedStyle(pieChartProperties);
+    this.view = [parseInt(style.width), parseInt(style.height)];
   }
 
 }

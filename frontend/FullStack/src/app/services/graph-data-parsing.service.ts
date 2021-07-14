@@ -111,9 +111,11 @@ export class GraphDataParsingService {
     let maxValue: number = chartData[0].series[0].value;
     for(let i=0; i<chartData.length; i++) {
       for(let j=0; j<chartData[i].series.length; j++) {
-        if(i==0) continue; // skip first value of entire set
-        if(minValue > chartData[i].series[j].value) minValue = chartData[i].series[j].value;
-        if(maxValue < chartData[i].series[j].value) maxValue = chartData[i].series[j].value;
+        let compare: number = chartData[i].series[j].value;
+
+        if(i==0 && j==0) continue; // skip first value of entire set
+        if(minValue > compare) minValue = compare;
+        if(maxValue < compare) maxValue = compare;
       }
     }
     // max, min
@@ -138,6 +140,8 @@ export class GraphDataParsingService {
         });
       });
     }
+    year = year.substr(0, 4);
+    console.log(year);
 
     // to confirm that no invalid data is gathered, guarantee that each object contains the specified year before returning
     // it's data point to the array
@@ -146,7 +150,8 @@ export class GraphDataParsingService {
 
       // find the correct year
       for(let j=0; j<in_plist[i].productYearlyData.length; j++) {
-        if(in_plist[i].productYearlyData[j].year == year) {
+        if(in_plist[i].productYearlyData[j].year.substr(0, 4) == year) {
+          console.log("Year: " + in_plist[i].productYearlyData[j].year.substr(0, 4) + " | [i, j]: ["+i+", "+j+"]");
           if(type == "units_sold") pieData.push({"name": name, "value": in_plist[i].productYearlyData[j].units_sold});
           else if(type == "production_cost") pieData.push({"name": name, "value": in_plist[i].productYearlyData[j].production_cost});
           else if(type == "distribution_cost") pieData.push({"name": name, "value": in_plist[i].productYearlyData[j].distribution_cost});
@@ -155,7 +160,6 @@ export class GraphDataParsingService {
                                                                             in_plist[i].productYearlyData[j].units_sold)});
           else if(type == "profit") pieData.push({"name": name, "value": ( ( in_plist[i].productYearlyData[j].retail_price * in_plist[i].productYearlyData[j].units_sold ) -
                                                                           ( in_plist[i].productYearlyData[j].distribution_cost * in_plist[i].productYearlyData[j].units_sold ) )})
-      
         }
       }
     }
@@ -167,11 +171,14 @@ export class GraphDataParsingService {
   // sort through data and find items with highest profit
   pie_chart_filter_data(pieData: IPieChartData[], invert: boolean = false, splice: number = -1): IPieChartData[] {
     // go through chartData array and find 3 data sets with highest value
+    console.log(JSON.parse(JSON.stringify(pieData)));
     pieData.sort((a, b) => a.value - b.value);
-    if(splice > 0 && splice < pieData.length)
-      pieData.splice(splice, pieData.length-splice);
+    console.log(JSON.parse(JSON.stringify(pieData)));
+    console.log(pieData);
     if(invert)
       pieData = pieData.reverse();
+    if(splice > 0 && splice < pieData.length)
+      pieData.splice(splice, pieData.length-splice);
     return pieData;
   }
 
