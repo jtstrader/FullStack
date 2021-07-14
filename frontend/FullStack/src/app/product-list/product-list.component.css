@@ -9,8 +9,14 @@
     text-align: center;
 }
 
+.filter-dropdown {
+    font-size: 12px;
+    width: 150px;
+}
+
 .search-bar {
     text-align: right;
+    margin-bottom: 20px;
 }
 
 .product-list-card {
