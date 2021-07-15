@@ -1,10 +1,15 @@
 <div class="background">
-  <div class="banner">
-    <span class="header"><a routerLink="/welcome">ACME Products</a></span>
-    <li><a routerLink="/gloprodustats">Global Product Statistics</a></li> <span class="separator">|</span> 
-    <li><a routerLink="/products">Product List</a></li> <span class="separator">|</span>
-    <li><a routerLink="/suggestionprodu">Add Product Suggestion</a></li> <span class="separator">|</span>
-    <li><a routerLink="/about">About</a></li> 
+  <div class="banner-main">
+    <div class="banner-left">
+      <span class="header"><a routerLink="/welcome">ACME Products</a></span>
+      <li><a routerLink="/gloprodustats">Global Product Statistics</a></li> <span class="separator">|</span> 
+      <li><a routerLink="/products">Product List</a></li> <span class="separator">|</span>
+      <li><a routerLink="/suggestionprodu">Add Product Suggestion</a></li> <span class="separator">|</span>
+      <li><a routerLink="/about">About</a></li> 
+    </div>
+    <div class="banner-right">
+      <li><a routerLink="/login">Login</a></li>
+    </div>
   </div>
   <router-outlet></router-outlet>
 </div>
