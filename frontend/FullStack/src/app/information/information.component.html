@@ -1,12 +1,35 @@
-<div class="main-container">
-    <mat-card *ngIf='product' class="product-card">
-        <mat-card-title>{{product.product_name}}</mat-card-title>
-        <mat-card-content>
-            <b>Classification: </b>{{product.category}}<br>
-            <b>ACME Rating: </b>{{product.acme_rating}}<br>
-            <b>User Rating: </b>{{product.user_rating}}<br>
-            <b>Amount in Stock: </b>{{product.amount_in_stock}}<br>
-            <b>Price: </b>{{product.productYearlyData | getLatestRetailPrice }}<br>
-        </mat-card-content>
-    </mat-card>
+<mat-card *ngIf='product' class="product-card mat-elevation-z20">
+    <mat-card-title>{{product.product_name}}</mat-card-title>
+    <mat-card-content>
+        <b>Classification: </b>{{product.category}}<br>
+        <b>ACME Rating: </b>{{product.acme_rating}}<br>
+        <b>User Rating: </b>{{product.user_rating}}<br>
+        <b>Amount in Stock: </b>{{product.amount_in_stock}}<br>
+        <b>Price: </b>{{product.productYearlyData | getLatestRetailPrice }}<br>
+    </mat-card-content>
+</mat-card>
+<div *ngIf='product' class="main-chart-container">
+    <div *ngFor='let chartData of chartList, let i = index'>
+        <mat-card class="chart-container mat-elevation-z20">
+            <mat-card-title class="chart-card-title">
+                {{chartData.yAxisLabel}}
+            </mat-card-title>
+            <ngx-charts-line-chart
+                [view]="view"
+                [scheme]=schemeSet[i]
+                [legend]=false
+                [animations]="animations"
+                [showXAxisLabel]="showXAxisLabel"
+                [showYAxisLabel]="showYAxisLabel"
+                [xAxis]="xAxis"
+                [yAxis]="yAxis"
+                [xAxisLabel]=chartData.xAxisLabel
+                [yAxisLabel]=chartData.yAxisLabel
+                [yScaleMax]=yScaleMax[i]
+                [yScaleMin]=yScaleMin[i]
+                [results]=chartData.dSet
+                >
+            </ngx-charts-line-chart>
+        </mat-card>
+    </div>
 </div>

@@ -1,4 +1,4 @@
-.main-container {
+.main-chart-container {
     margin-top: 50px;
     display: flex;
     flex-direction: row;
@@ -7,8 +7,15 @@
     align-items: center;
 }
 
+.chart-card-title {
+    text-align: center;
+}
+
 .product-card {
-   width: 250px; 
+   width: 400px; 
+   margin: auto;
+   margin-top: 20px;
+   text-align: center;
 }
 
 .product-card mat-card-title {
@@ -17,4 +24,10 @@
 
 .product-card mat-card-content {
     font-size: 16px;
+}
+
+.chart-container {
+    margin: 10px;
+    width: 850px;
+    height: 380px;
 }

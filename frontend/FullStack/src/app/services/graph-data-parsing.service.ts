@@ -4,6 +4,7 @@ import { ILineGraphSeriesData } from '../interfaces/GraphDataInterfaces/iline-gr
 import { IProduct } from '../interfaces/iproduct';
 import { mean, std } from 'mathjs';
 import { IPieChartData } from '../interfaces/GraphDataInterfaces/ipie-chart-data';
+import { ILineGraphDataList } from '../interfaces/GraphDataInterfaces/iline-graph-data-list';
 
 @Injectable({
   providedIn: 'root'
@@ -121,6 +122,56 @@ export class GraphDataParsingService {
     // max, min
     return [(maxValue + maxValue/7), (minValue - minValue/7)];
   }
+
+  // get all necessary costs/price data from an object
+  line_chart_get_all_data_single(product: IProduct): ILineGraphDataList[] {
+    return [
+      this.line_chart_data_get_single(product, "units_sold"),
+      this.line_chart_data_get_single(product, "production_cost"),
+      this.line_chart_data_get_single(product, "distribution_cost"),
+      this.line_chart_data_get_single(product, "retail_price"),
+      this.line_chart_data_get_single(product, "revenue"),
+      this.line_chart_data_get_single(product, "profit")
+    ];
+  }
+
+  line_chart_data_get_single(product: IProduct, type: string): ILineGraphDataList {
+    let data: ILineGraphDataList = {"yAxisLabel": "", "xAxisLabel": "", "dSet": []};
+    let chartData: ILineGraphData[] = [];
+    let dataSet: ILineGraphData = {"name": "", "series": []};
+    let series: ILineGraphSeriesData = {"name": "", "value": 0};
+
+    if(type == "units_sold") data.yAxisLabel = "Units Sold";
+    else if(type == "production_cost") data.yAxisLabel = "Production Cost";
+    else if(type == "distribution_cost") data.yAxisLabel = "Distribution Cost";
+    else if(type == "retail_price") data.yAxisLabel = "Retail Price";
+    else if(type == "revenue") data.yAxisLabel = "Revenue";
+    else if(type == "profit") data.yAxisLabel = "Profits";
+                                    
+    data.xAxisLabel = "Year";
+
+    // loop through series (each individual sale)
+    for(let j=0; j<product.productYearlyData.length; j++) {
+      series.name = product.productYearlyData[j].year.substr(0, 4);
+      
+      if(type == "units_sold") series.value = product.productYearlyData[j].units_sold;
+      else if(type == "production_cost") series.value = product.productYearlyData[j].production_cost;
+      else if(type == "distribution_cost") series.value = product.productYearlyData[j].distribution_cost;
+      else if(type == "retail_price") series.value = product.productYearlyData[j].retail_price;
+      else if(type == "revenue") series.value = ( product.productYearlyData[j].retail_price * product.productYearlyData[j].units_sold );
+      else if(type == "profit") series.value = ( ( product.productYearlyData[j].retail_price * product.productYearlyData[j].units_sold ) -
+                                                    product.productYearlyData[j].distribution_cost * product.productYearlyData[j].units_sold )
+      else {
+        console.log("invalid line_chart_data_get_single() type: string variable");
+        return data;
+      }
+      dataSet.series.push(JSON.parse(JSON.stringify(series)));
+    }
+    chartData.push(JSON.parse(JSON.stringify(dataSet)));
+    data.dSet = JSON.parse(JSON.stringify(chartData));
+    return data;
+  }
+
   ////////////////////////////////////////////////////////////////////////////////
 
   ////////////////////////////////////////////////////////////////////////////////
@@ -141,7 +192,6 @@ export class GraphDataParsingService {
       });
     }
     year = year.substr(0, 4);
-    console.log(year);
 
     // to confirm that no invalid data is gathered, guarantee that each object contains the specified year before returning
     // it's data point to the array
@@ -171,10 +221,7 @@ export class GraphDataParsingService {
   // sort through data and find items with highest profit
   pie_chart_filter_data(pieData: IPieChartData[], invert: boolean = false, splice: number = -1): IPieChartData[] {
     // go through chartData array and find 3 data sets with highest value
-    console.log(JSON.parse(JSON.stringify(pieData)));
     pieData.sort((a, b) => a.value - b.value);
-    console.log(JSON.parse(JSON.stringify(pieData)));
-    console.log(pieData);
     if(invert)
       pieData = pieData.reverse();
     if(splice > 0 && splice < pieData.length)
