@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductListComponent } from 'src/app/product-list/product-list.component';
-import { InformationComponent } from 'src/app/information/information.component';
-import { GlobalProductStatisticsComponent } from 'src/app/global-product-statistics/global-product-statistics.component';
+import { ProductListComponent } from 'src/app-default/product-list/product-list.component';
+import { InformationComponent } from 'src/app-default/information/information.component';
+import { GlobalProductStatisticsComponent } from 'src/app-default/global-product-statistics/global-product-statistics.component';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
-import { ProductSuggestionFormComponent } from 'src/app/product-suggestion-form/product-suggestion-form.component';
+import { ProductSuggestionFormComponent } from 'src/app-default/product-suggestion-form/product-suggestion-form.component';
 
 
 

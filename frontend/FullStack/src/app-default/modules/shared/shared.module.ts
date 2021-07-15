@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { GetLatestRetailPricePipe } from 'src/app/pipes/get-latest-retail-price.pipe';
+import { GetLatestRetailPricePipe } from 'src/app-default/pipes/get-latest-retail-price.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
