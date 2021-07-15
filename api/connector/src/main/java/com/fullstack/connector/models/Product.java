@@ -13,6 +13,7 @@ public class Product {
     Long product_id;
 
     String product_name;
+    String product_description;
     String category;
     Integer amount_in_stock;
     Float acme_rating;
@@ -42,6 +43,14 @@ public class Product {
 
     public void setProduct_name(String product_name) {
         this.product_name = product_name;
+    }
+
+    public String getProduct_description() {
+        return product_description;
+    }
+
+    public void setProduct_description(String product_description) {
+        this.product_description = product_description;
     }
 
     public String getCategory() {
