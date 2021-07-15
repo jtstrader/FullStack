@@ -5,6 +5,7 @@ import { InformationComponent } from 'src/app/information/information.component'
 import { GlobalProductStatisticsComponent } from 'src/app/global-product-statistics/global-product-statistics.component';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
+import { ProductSuggestionFormComponent } from 'src/app/product-suggestion-form/product-suggestion-form.component';
 
 
 
@@ -20,7 +21,8 @@ import { RouterModule } from '@angular/router';
     RouterModule.forChild([
       { path: 'products', component: ProductListComponent },
       { path: 'products/:id', component: InformationComponent },
-      { path: 'gloprodustats', component: GlobalProductStatisticsComponent }
+      { path: 'gloprodustats', component: GlobalProductStatisticsComponent },
+      { path: 'suggestionprodu', component: ProductSuggestionFormComponent }
     ])
   ]
 })

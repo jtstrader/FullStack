@@ -1,0 +1,23 @@
+<div class="main-form-container">
+    <mat-card class="suggestion-form-card mat-elevation-z20">
+        <mat-card-title>
+            Product Suggestion Form
+        </mat-card-title>
+        <br>
+        <mat-card-content>
+            <mat-form-field appearance="outline">
+                <mat-label>Product Name</mat-label>
+                <input #name_input maxlength="50" matInput [(ngModel)]='product_name_input'>
+                <mat-hint align="end">{{name_input.value?.length || 0}}/50</mat-hint>
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="outline" class='product-desc-textbox'>
+                <mat-label>Product Description</mat-label>
+                <textarea #desc_input maxlength="1000" matInput [(ngModel)]='product_description_input'></textarea>
+                <mat-hint align="end">{{desc_input.value?.length || 0}}/1000</mat-hint>
+            </mat-form-field>
+            <br>
+            <button id="submit" mat-raised-button (click)="postProposal()">Submit Proposal</button>
+        </mat-card-content>
+    </mat-card>
+</div>

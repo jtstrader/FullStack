@@ -9,7 +9,8 @@ import { NgxGaugeModule } from 'ngx-gauge';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { HttpClientModule } from '@angular/common/http';
 import { MatFormFieldModule } from '@angular/material/form-field';
-
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
@@ -29,7 +30,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatSelectModule,
     NgxGaugeModule,
     NgxChartsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatInputModule,
+    MatButtonModule
   ]
 })
 export class SharedModule {

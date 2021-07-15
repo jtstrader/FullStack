@@ -1,0 +1,47 @@
+.main-form-container {
+    width: 100%;
+    height: calc(100%-20px);
+}
+
+.suggestion-form-card {
+    margin: auto;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.product-desc-textbox {
+    width: 500px;
+}
+
+#submit {
+    font-size: 18px;
+}
+
+
+.suggestion-form-card mat-card-content {
+    font-size: 20px;
+}
+
+@media screen and (max-width: 1000px) {
+    .suggestion-form-card {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 1500px) and (min-width: 1001px) {
+    .suggestion-form-card {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 2000px) and (min-width: 1501px) {
+    .suggestion-form-card {
+        width: 40%;
+    }
+}
+
+@media screen and (min-width: 2001px) {
+    .suggestion-form-card {
+        width: 35%;
+    }
+}

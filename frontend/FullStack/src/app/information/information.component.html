@@ -5,7 +5,8 @@
         <b>ACME Rating: </b>{{product.acme_rating}}<br>
         <b>User Rating: </b>{{product.user_rating}}<br>
         <b>Amount in Stock: </b>{{product.amount_in_stock}}<br>
-        <b>Price: </b>{{product.productYearlyData | getLatestRetailPrice }}<br>
+        <b>Price: </b>{{product.productYearlyData | getLatestRetailPrice }}<br><br>
+        <b>Description: </b>{{product.product_description}}
     </mat-card-content>
 </mat-card>
 <div *ngIf='product' class="main-chart-container">

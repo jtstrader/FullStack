@@ -4,7 +4,7 @@
             ACME INCORPORATION OFFICIAL PRODUCT LIST
         </mat-card-title>
         <mat-card-title class="search-bar">
-            <mat-form-field appearance="fill" class="filter-dropdown">
+            <mat-form-field appearance="outline" class="filter-dropdown">
                 <mat-label>Search By:</mat-label>
                 <mat-select [(value)]='filterType' placeholder="Mode">
                     <mat-option value="Name">Name</mat-option>
@@ -23,7 +23,8 @@
                     <b>ACME Rating: </b>{{product.acme_rating}}<br>
                     <b>User Rating: </b>{{product.user_rating}}<br>
                     <b>Amount in Stock: </b>{{product.amount_in_stock}}<br>
-                    <b>Price: </b>{{product.productYearlyData | getLatestRetailPrice }}<br>
+                    <b>Price: </b>{{product.productYearlyData | getLatestRetailPrice }}<br><br>
+                    <b>Description: </b>{{product.product_description}}
                 </mat-card-content>
             </mat-card>
         </mat-card-content>

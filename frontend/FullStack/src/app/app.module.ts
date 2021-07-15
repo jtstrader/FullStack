@@ -9,12 +9,14 @@ import { AboutComponent } from './about/about.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { SharedModule } from './modules/shared/shared.module';
 import { ProductModule } from './modules/product/product.module';
+import { ProductSuggestionFormComponent } from './product-suggestion-form/product-suggestion-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AboutComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    ProductSuggestionFormComponent
   ],
   imports: [
     BrowserModule,
