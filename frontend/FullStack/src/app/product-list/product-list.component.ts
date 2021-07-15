@@ -67,7 +67,7 @@ export class ProductListComponent implements OnInit {
     return [];
   }
 
-  gotoInfoPage(id: number): void {
+  gotoInfoPage(id: number | undefined): void {
     this.router.navigate(['/', 'products', id]);
   }
 

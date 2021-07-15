@@ -1,7 +1,7 @@
 import { IProductYearlyData } from "./iproductyearlydata";
 
 export interface IProduct {
-    product_id: number;
+    product_id: number | undefined;
     product_name: string;
     product_description: string;
     category: string;

@@ -1,5 +1,5 @@
 export interface IProductYearlyData {
-    id: number;
+    id: number | undefined;
     year: string;
     units_sold: number;
     production_cost: number;
