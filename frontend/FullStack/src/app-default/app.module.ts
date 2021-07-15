@@ -9,7 +9,6 @@ import { AboutComponent } from './about/about.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { SharedModule } from './modules/shared/shared.module';
 import { ProductModule } from './modules/product/product.module';
-import { ProductSuggestionFormComponent } from './product-suggestion-form/product-suggestion-form.component';
 import { LoginComponent } from './login/login.component';
 
 @NgModule({
@@ -17,7 +16,6 @@ import { LoginComponent } from './login/login.component';
     AppComponent,
     AboutComponent,
     WelcomeComponent,
-    ProductSuggestionFormComponent,
     LoginComponent
   ],
   imports: [

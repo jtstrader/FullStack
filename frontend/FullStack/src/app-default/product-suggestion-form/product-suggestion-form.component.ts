@@ -53,8 +53,6 @@ export class ProductSuggestionFormComponent implements OnInit {
       return;
     }
 
-
-
     // post request
     let newProposal: IProductProposal = {
       "proposal_id": 85, 

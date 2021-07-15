@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { ILineGraphData } from '../interfaces/GraphDataInterfaces/iline-graph-data';
 import { ILineGraphDataList } from '../interfaces/GraphDataInterfaces/iline-graph-data-list';
 import { IProduct } from '../interfaces/iproduct';
 import { GraphDataParsingService } from '../services/graph-data-parsing.service';
@@ -9,10 +8,10 @@ import { ProductService } from '../services/product.service';
 
 @Component({
   selector: 'app-information',
-  templateUrl: './information.component.html',
-  styleUrls: ['./information.component.css']
+  templateUrl: './product-information.component.html',
+  styleUrls: ['./product-information.component.css']
 })
-export class InformationComponent implements OnInit {
+export class ProductInformationComponent implements OnInit {
 
   constructor(private productService: ProductService,
               private gdParser: GraphDataParsingService,

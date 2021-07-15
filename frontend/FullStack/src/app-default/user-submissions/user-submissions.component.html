@@ -1,0 +1,22 @@
+<div class="main-container">
+    <mat-card class="product-list-card mat-elevation-z20">
+        <mat-card-title class="main-title">
+            ACME INCORPORATION USER PROPOSALS
+        </mat-card-title>
+        <mat-card-title class="search-bar">
+            <mat-form-field appearance="outline" class="filter-search">
+                <mat-label>Sort By Name</mat-label>
+                <input #sort maxlength="50" matInput [(ngModel)]='filter'>
+            </mat-form-field>
+            
+        </mat-card-title>
+        <mat-card-content *ngFor="let product of filteredPList">
+            <mat-card class="product-card mat-elevation-z6">
+                <mat-card-title>{{product.product_name}}</mat-card-title>
+                <mat-card-content>
+                    <b>Description: </b>{{product.product_description}}
+                </mat-card-content>
+            </mat-card>
+        </mat-card-content>
+    </mat-card>
+</div>
