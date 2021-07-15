@@ -1,1 +1,12 @@
-<p>information works!</p>
+<div class="main-container">
+    <mat-card *ngIf='product' class="product-card">
+        <mat-card-title>{{product.product_name}}</mat-card-title>
+        <mat-card-content>
+            <b>Classification: </b>{{product.category}}<br>
+            <b>ACME Rating: </b>{{product.acme_rating}}<br>
+            <b>User Rating: </b>{{product.user_rating}}<br>
+            <b>Amount in Stock: </b>{{product.amount_in_stock}}<br>
+            <b>Price: </b>{{product.productYearlyData | getLatestRetailPrice }}<br>
+        </mat-card-content>
+    </mat-card>
+</div>

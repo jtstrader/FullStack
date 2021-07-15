@@ -1,0 +1,20 @@
+.main-container {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-card {
+   width: 250px; 
+}
+
+.product-card mat-card-title {
+    font-size: 28px;
+}
+
+.product-card mat-card-content {
+    font-size: 16px;
+}
