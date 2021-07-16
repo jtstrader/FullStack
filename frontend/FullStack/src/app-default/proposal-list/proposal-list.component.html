@@ -1,5 +1,5 @@
 <div class="main-container">
-    <mat-card class="product-list-card mat-elevation-z20">
+    <mat-card class="proposal-list-card mat-elevation-z20">
         <mat-card-title class="main-title">
             ACME INCORPORATION USER PROPOSALS
         </mat-card-title>
@@ -10,11 +10,11 @@
             </mat-form-field>
             
         </mat-card-title>
-        <mat-card-content *ngFor="let product of filteredPList">
-            <mat-card class="product-card mat-elevation-z6">
-                <mat-card-title>{{product.product_name}}</mat-card-title>
+        <mat-card-content *ngFor="let proposal of filteredPList">
+            <mat-card class="proposal-card mat-elevation-z6" (click)="gotoProposalInfoPage(proposal.proposal_id)">
+                <mat-card-title>{{proposal.product_name}}</mat-card-title>
                 <mat-card-content>
-                    <b>Description: </b>{{product.product_description}}
+                    <b>Description: </b>{{proposal.product_description}}
                 </mat-card-content>
             </mat-card>
         </mat-card-content>

@@ -7,13 +7,21 @@ import { tap, catchError } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductProposalServiceService {
+export class ProductProposalService {
 
   constructor(private http: HttpClient) { }
 
   // api/v1/proposals
   getProposalsList(): Observable<IProductProposal[]> {
     return this.http.get<IProductProposal[]>("http://localhost:8080/api/v1/proposals/").pipe(
+      tap(data => console.log('All: ', JSON.stringify(data))),
+      catchError(this.handleError)
+    );
+  }
+
+  // api/v1/proposal/{id}
+  getProposal(id: number): Observable<IProductProposal> {
+    return this.http.get<IProductProposal>(`http://localhost:8080/api/v1/proposals/${id}`).pipe(
       tap(data => console.log('All: ', JSON.stringify(data))),
       catchError(this.handleError)
     );

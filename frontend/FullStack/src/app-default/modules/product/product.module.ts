@@ -7,7 +7,8 @@ import { ProductListComponent } from 'src/app-default/product-list/product-list.
 import { ProductInformationComponent } from 'src/app-default/product-information/product-information.component';
 import { GlobalProductStatisticsComponent } from 'src/app-default/global-product-statistics/global-product-statistics.component';
 import { ProductSuggestionFormComponent } from 'src/app-default/product-suggestion-form/product-suggestion-form.component';
-import { UserSubmissionsComponent } from 'src/app-default/user-submissions/user-submissions.component';
+import { ProposalListComponent } from 'src/app-default/proposal-list/proposal-list.component';
+import { ProposalInformationComponent } from 'src/app-default/proposal-information/proposal-information.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { UserSubmissionsComponent } from 'src/app-default/user-submissions/user-
     ProductInformationComponent,
     GlobalProductStatisticsComponent,
     ProductSuggestionFormComponent,
-    UserSubmissionsComponent
+    ProposalListComponent,
+    ProposalInformationComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +28,8 @@ import { UserSubmissionsComponent } from 'src/app-default/user-submissions/user-
       { path: 'products/:id', component: ProductInformationComponent },
       { path: 'gloprodustats', component: GlobalProductStatisticsComponent },
       { path: 'suggestionprodu', component: ProductSuggestionFormComponent },
-      { path: 'usersubs', component: UserSubmissionsComponent }
+      { path: 'usersubs', component: ProposalListComponent },
+      { path: 'usersubs/:id', component: ProposalInformationComponent }
     ])
   ]
 })

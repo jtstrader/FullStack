@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { IProductProposal } from '../interfaces/iproduct-proposal';
-import { ProductProposalServiceService } from '../services/product-proposal-service.service';
+import { ProductProposalService } from '../services/product-proposal.service';
 import { ProductService } from '../services/product.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { ProductService } from '../services/product.service';
 export class ProductSuggestionFormComponent implements OnInit {
 
   constructor(private productService: ProductService,
-              private productProposalService: ProductProposalServiceService) { }
+              private productProposalService: ProductProposalService) { }
 
 
   private _product_name_input: string = "";
@@ -55,7 +55,7 @@ export class ProductSuggestionFormComponent implements OnInit {
 
     // post request
     let newProposal: IProductProposal = {
-      "proposal_id": 85, 
+      "proposal_id": -1, 
       "product_name": this._product_name_input, 
       "product_description": this._product_description_input
     }
@@ -68,5 +68,4 @@ export class ProductSuggestionFormComponent implements OnInit {
       }
     });
   }
-
 }

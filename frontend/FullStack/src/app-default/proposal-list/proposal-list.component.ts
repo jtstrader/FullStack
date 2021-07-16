@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { IProduct } from '../interfaces/iproduct';
 import { IProductProposal } from '../interfaces/iproduct-proposal';
-import { ProductProposalServiceService } from '../services/product-proposal-service.service';
+import { ProductProposalService } from '../services/product-proposal.service';
 
 @Component({
   selector: 'app-user-submissions',
-  templateUrl: './user-submissions.component.html',
-  styleUrls: ['./user-submissions.component.css']
+  templateUrl: './proposal-list.component.html',
+  styleUrls: ['./proposal-list.component.css']
 })
-export class UserSubmissionsComponent implements OnInit {
+export class ProposalListComponent implements OnInit {
 
-  constructor(private productProposalService: ProductProposalServiceService,
-    ) { }
+  constructor(private productProposalService: ProductProposalService,
+              private router: Router) { }
 
 sub!: Subscription;
 plist: IProductProposal[] | undefined;
@@ -42,8 +42,8 @@ set filter(value: string) {
   filterList(filter: string, filterType: string = "Name"): IProductProposal[] {
     filter = filter.toLocaleLowerCase();
     if(this.plist != undefined) {
-      return this.plist.filter((product: IProductProposal) =>
-        product.product_name.toLocaleLowerCase().includes(filter));
+      return this.plist.filter((proposal: IProductProposal) =>
+        proposal.product_name.toLocaleLowerCase().includes(filter));
     }
     return [];
   }
@@ -53,5 +53,9 @@ set filter(value: string) {
       next: plist => { this.plist = plist; this.filteredPList = this.plist },
       error: err => this.errorMessage = err
     });
+  }
+
+  gotoProposalInfoPage(id: number): void {
+    this.router.navigate(['/', 'usersubs', id])
   }
 }

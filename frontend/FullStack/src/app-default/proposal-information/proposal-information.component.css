@@ -1,0 +1,33 @@
+.main-chart-container {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.chart-card-title {
+    text-align: center;
+}
+
+.proposal-card {
+   width: 400px; 
+   margin: auto;
+   margin-top: 20px;
+   text-align: center;
+}
+
+.proposal-card mat-card-title {
+    font-size: 28px;
+}
+
+.proposal-card mat-card-content {
+    font-size: 16px;
+}
+
+.chart-container {
+    margin: 10px;
+    width: 850px;
+    height: 380px;
+}
