@@ -1,13 +1,11 @@
-.main-chart-container {
+.main-container {
+    background-color: white;
+    position: absolute;
     margin-top: 50px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+    top: 0; left: 0; right: 0; bottom: 0;
 }
 
-.chart-card-title {
+.main-title {
     text-align: center;
 }
 
@@ -26,8 +24,72 @@
     font-size: 16px;
 }
 
-.chart-container {
-    margin: 10px;
-    width: 850px;
-    height: 380px;
+.comment-container {
+    background-color: #efefef;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.comment-container-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#new-comment-box {
+    margin: 20px;
+}
+
+.comment-textbox {
+    width: 100%;
+}
+
+.comment-textbox textarea {
+    height: 120px;
+    resize: none !important; /* overwrite Angular text resizing function */
+}
+
+#comment-post-button {
+    margin-left: 15px;
+    margin-bottom: 15px;
+}
+
+.comment-card {
+    margin: 20px;
+}
+
+.comment-card-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.vote-icon {
+    font-size: 24px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#ratio-num {
+    font-size: 22px;
+    margin-right: 3px;
+}
+
+@media screen and (max-width: 1000px) {
+    .comment-container {
+        width: 95%;
+    }
+}
+
+@media screen and (max-width: 2000px) and (min-width: 1001px) {
+    .comment-container {
+        width: 75%;
+    }
+}
+
+@media screen and (min-width: 2001px) {
+    .comment-container {
+        width: 60%;
+    }
 }

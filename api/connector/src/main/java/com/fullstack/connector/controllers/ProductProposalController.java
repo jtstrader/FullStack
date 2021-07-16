@@ -9,7 +9,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/proposals")
-@CrossOrigin
 public class ProductProposalController {
     @Autowired
     private ProductProposalRepository productProposalRepository;

@@ -2,10 +2,8 @@ package com.fullstack.connector.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "product_proposals")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -16,6 +14,13 @@ public class ProductProposal {
 
     String product_name;
     String product_description;
+
+    @ManyToMany
+    @JoinTable(
+            name = "proposal_comment_join",
+            joinColumns = @JoinColumn(name = "proposal_id"),
+            inverseJoinColumns = @JoinColumn(name = "comment_id"))
+    private List<Comment> comments;
 
     public ProductProposal() {
     }
@@ -42,5 +47,13 @@ public class ProductProposal {
 
     public void setProduct_description(String product_description) {
         this.product_description = product_description;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }

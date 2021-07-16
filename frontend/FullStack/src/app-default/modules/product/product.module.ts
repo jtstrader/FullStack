@@ -9,6 +9,7 @@ import { GlobalProductStatisticsComponent } from 'src/app-default/global-product
 import { ProductSuggestionFormComponent } from 'src/app-default/product-suggestion-form/product-suggestion-form.component';
 import { ProposalListComponent } from 'src/app-default/proposal-list/proposal-list.component';
 import { ProposalInformationComponent } from 'src/app-default/proposal-information/proposal-information.component';
+import { PreventUndefinedCommentRatioPipe } from 'src/app-default/pipes/prevent-undefined-comment-ratio.pipe';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { ProposalInformationComponent } from 'src/app-default/proposal-informati
     GlobalProductStatisticsComponent,
     ProductSuggestionFormComponent,
     ProposalListComponent,
-    ProposalInformationComponent
+    ProposalInformationComponent,
+    PreventUndefinedCommentRatioPipe
   ],
   imports: [
     CommonModule,

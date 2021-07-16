@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { IProductProposal } from '../interfaces/iproduct-proposal';
 import { ProductProposalService } from '../services/product-proposal.service';
 import { ProductService } from '../services/product.service';
@@ -15,6 +14,7 @@ export class ProductSuggestionFormComponent implements OnInit {
               private productProposalService: ProductProposalService) { }
 
 
+  // getters and setters for two-way binding
   private _product_name_input: string = "";
   get product_name_input(): string {
     return this._product_name_input;
@@ -35,6 +35,7 @@ export class ProductSuggestionFormComponent implements OnInit {
   }
 
   postProposal(): void {
+    // check if both name and description have been input
     let missing: [boolean, boolean] = [false, false];
     if(this._product_name_input == "") missing[0] = true;
     if(this._product_description_input == "") missing[1] = true;
@@ -55,13 +56,13 @@ export class ProductSuggestionFormComponent implements OnInit {
 
     // post request
     let newProposal: IProductProposal = {
-      "proposal_id": -1, 
+      "proposal_id": -1, // id handled by API
       "product_name": this._product_name_input, 
-      "product_description": this._product_description_input
+      "product_description": this._product_description_input,
+      "comments": [] // zero comments upon creation
     }
     let response: IProductProposal;
-    let errorMessage: string;
-    let newSub: Subscription = this.productProposalService.postProposal(newProposal).subscribe({
+    this.productProposalService.postProposal(newProposal).subscribe({
       next: httpResponse => response = httpResponse,
       error: err => {
         console.log(err)
