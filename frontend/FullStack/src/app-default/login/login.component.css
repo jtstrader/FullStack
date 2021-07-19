@@ -1,0 +1,60 @@
+.login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-card {
+    margin-top: 20px;
+
+    /* inherit flex properties from main container */
+    display: inherit;
+    flex-direction: inherit;
+    justify-content: inherit;
+    align-items: inherit;
+
+}
+
+.login-card mat-card-content {
+    /* inherit flex properties from main container */
+    display: inherit;
+    flex-direction: inherit;
+    justify-content: inherit;
+    align-items: inherit;
+}
+
+.login-card mat-card-title {
+    font-size: 30px;
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+.fail {
+    color: crimson;
+    font-size: 10px;
+}
+
+@media screen and (max-width: 1000px) {
+    .login-card {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 1500px) and (min-width: 1001px) {
+    .login-card {
+        width: 95%;
+    }
+}
+
+@media screen and (max-width: 2200px) and (min-width: 1501px) {
+    .login-card {
+        width: 70%;
+    }
+}
+
+@media screen and (min-width: 2201px) {
+    .login-card {
+        width: 60%;
+    }
+}

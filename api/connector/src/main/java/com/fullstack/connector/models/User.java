@@ -17,6 +17,7 @@ public class User {
     String user_name;
     String salt;
     String hash;
+    Boolean admin;
 
     public User() {
     }
@@ -51,5 +52,13 @@ public class User {
 
     public void setHash(String hash) {
         this.hash = hash;
+    }
+
+    public Boolean getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Boolean admin) {
+        this.admin = admin;
     }
 }

@@ -1,15 +1,13 @@
 package com.fullstack.connector.controllers;
 
-import com.fullstack.connector.models.Admin;
-import com.fullstack.connector.repositories.AdminRepository;
+import com.fullstack.connector.models.User;
+import com.fullstack.connector.repositories.UserRepository;
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import org.apache.commons.codec.binary.Base64;
-
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
-import javax.persistence.Convert;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
@@ -18,30 +16,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/adloginv1")
-public class AdminController {
+@RequestMapping("/api/login")
+public class UserController {
     @Autowired
-    AdminRepository adminRepository;
+    UserRepository userRepository;
 
     // should not return list of passwords
     // return only true/false status is the password
     // is correctly identified from the input
-    // all account creation for administrators is handled
-    // database side
+    // all account creation for users is handled
+    // database side for now
+
+    // TODO: create post method to create new users with a Register menu
+
     @GetMapping
-    public boolean login(@RequestParam String admin_name, @RequestParam String password_attempt) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        List<Admin> admlist = adminRepository.findAdminByName(admin_name);
-        for(Admin adm : admlist) {
+    public boolean login(@RequestParam String user_name, @RequestParam String password_attempt) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        List<User> usrList = userRepository.findUserByName(user_name);
+        for(User usr : usrList) {
 
             // for testing purposes
-            System.out.println("admin_name: " + admin_name);
+            System.out.println("user_name: " + user_name);
             System.out.println("password_attempt: " + password_attempt);
-            String calc_hash = hash(adm.getSalt(), password_attempt);
-            String find_hash = adm.getHash();
+            String calc_hash = hash(usr.getSalt(), password_attempt);
+            String find_hash = usr.getHash();
 
             System.out.println("Hash in DB: " + find_hash + "\nHash Calculated: " + calc_hash);
 
-            if(adm.getHash().equals(hash(adm.getSalt(), password_attempt)))
+            if(usr.getHash().equals(hash(usr.getSalt(), password_attempt)))
                 return true;
         }
         return false;
@@ -58,14 +59,15 @@ public class AdminController {
     // for testing purposes only
     // TODO: remove function when done testing
     @PostMapping("/post_test")
-    public Admin CreateHash(@RequestParam String name, @RequestParam String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        Admin newAdmin = new Admin();
+    public User CreateHash(@RequestParam String name, @RequestParam String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        User newUser = new User();
         List<String> hashResult = hash(password);
-        newAdmin.setAdmin_name(name);
-        newAdmin.setSalt(hashResult.get(0));
-        newAdmin.setHash(hashResult.get(1));
+        newUser.setUser_name(name);
+        newUser.setSalt(hashResult.get(0));
+        newUser.setHash(hashResult.get(1));
+        newUser.setAdmin(false);
 
-        return adminRepository.saveAndFlush(newAdmin);
+        return userRepository.saveAndFlush(newUser);
     }
 
     // TODO: remove function when done testing
@@ -85,10 +87,9 @@ public class AdminController {
     }
 
     // TODO: remove function when done testing
-    // get entire list of admins
+    // get entire list of users
     @GetMapping("/all")
-    public List<Admin> list() {
-        return adminRepository.findAll();
+    public List<User> list() {
+        return userRepository.findAll();
     }
-
 }

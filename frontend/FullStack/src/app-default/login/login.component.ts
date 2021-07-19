@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +9,45 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(private loginService: LoginService) { }
 
-  ngOnInit(): void {
+  user_name: string | undefined;
+  password: string | undefined;
+
+  uFail: boolean = false;
+  pFail: boolean = false;
+
+  sub!: Subscription;
+  success: boolean = false;
+  errorMessage: string = "";
+
+  login(): void {
+
+    // catch errors first
+    let err: boolean[] = [false, false];
+    if(this.user_name == undefined || this.user_name == "")
+      this.uFail = true; 
+    else
+      this.uFail = false;
+    if(this.password == undefined || this.password == "")
+      this.pFail = true;
+    else
+      this.pFail = false;
+    if(this.uFail || this.pFail)
+      return;
+
+    if(this.user_name != undefined && this.password != undefined) {
+      this.sub = this.loginService.login(this.user_name, this.password).subscribe({
+        next: OK => {
+          this.success = OK;
+          console.log(this.success);
+        },
+        error: err => this.errorMessage = err
+      })
+    }
   }
 
+  ngOnInit(): void {
+
+  }
 }
