@@ -1,0 +1,32 @@
+<div class="register-container">
+    <mat-card class="register-card mat-elevation-z20">
+        <mat-card-title>
+            ACME Inc. Account Registration
+        </mat-card-title>
+        <mat-card-content>
+            <mat-form-field appearance="outline">
+                <mat-label>Username</mat-label>
+                <input matInput #user type="text" [(ngModel)]="requiredFields[0]">
+                <mat-hint align="end">{{user.value?.length || 0}}/50</mat-hint>
+            </mat-form-field>
+            <span class="fail" *ngIf="failedFields[0]">Username is required.</span>
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input matInput #passinit type="password" [(ngModel)]="requiredFields[1]">
+                <mat-hint align="end">{{passinit.value?.length || 0}}/50</mat-hint>
+            </mat-form-field>
+            <span class="fail" *ngIf="failedFields[1]">Password is required.</span>
+            <mat-form-field appearance="outline">
+                <mat-label>Confirm Password</mat-label>
+                <input matInput #passconf type="password" [(ngModel)]="requiredFields[2]">
+                <mat-hint align="end">{{passconf.value?.length || 0}}/50</mat-hint>
+            </mat-form-field>
+            <span class="fail" *ngIf="failedFields[2]">Please confirm your password.</span>
+            <span class="fail" *ngIf="noMatch">Passwords do not match.</span>
+            <button class="button" mat-raised-button (click)="createAccount()">Create Account</button>
+            <span class="fail" *ngIf="userTaken">That username is already taken.</span>
+            <span class="fail" *ngIf="ourEnd">Uh oh... looks like we had an error on our end. Please try again later.</span>
+            <span class="success" *ngIf="success">Account successfully created.</span>
+        </mat-card-content>
+    </mat-card>
+</div>

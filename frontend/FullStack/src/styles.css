@@ -3,3 +3,5 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .reading-block { overflow: visible !important;} /* fix ngx-gauge */
+.mat-form-field-appearance-outline .mat-form-field-outline { color: crimson !important; }
+.mat-focused .mat-form-field-label { color: crimson !important; }

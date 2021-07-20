@@ -30,22 +30,22 @@ public class UserController {
     // TODO: create post method to create new users with a Register menu
 
     @GetMapping
-    public boolean login(@RequestParam String user_name, @RequestParam String password_attempt) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        List<User> usrList = userRepository.findUserByName(user_name);
-        for(User usr : usrList) {
+    public String login(@RequestParam String user_name, @RequestParam String password_attempt) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        User usr = userRepository.findUserByName(user_name);
+        if(usr == null)
+            return "FAIL: User not found";
 
-            // for testing purposes
-            System.out.println("user_name: " + user_name);
-            System.out.println("password_attempt: " + password_attempt);
-            String calc_hash = hash(usr.getSalt(), password_attempt);
-            String find_hash = usr.getHash();
+        // for testing purposes
+        System.out.println("user_name: " + user_name);
+        System.out.println("password_attempt: " + password_attempt);
+        String calc_hash = hash(usr.getSalt(), password_attempt);
+        String find_hash = usr.getHash();
 
-            System.out.println("Hash in DB: " + find_hash + "\nHash Calculated: " + calc_hash);
+        System.out.println("Hash in DB: " + find_hash + "\nHash Calculated: " + calc_hash);
 
-            if(usr.getHash().equals(hash(usr.getSalt(), password_attempt)))
-                return true;
-        }
-        return false;
+        if(usr.getHash().equals(hash(usr.getSalt(), password_attempt)))
+            return "OK: Login success.";
+        return "FAIL: Invalid password.";
     }
 
     // hashing function
@@ -56,21 +56,32 @@ public class UserController {
         return Base64.encodeBase64String(factory.generateSecret(spec).getEncoded());
     }
 
-    // for testing purposes only
-    // TODO: remove function when done testing
-    @PostMapping("/post_test")
-    public User CreateHash(@RequestParam String name, @RequestParam String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    // create new user account, will default to no admin privileges
+    @PostMapping("/register")
+    public String CreateHash(@RequestParam String new_user_name, @RequestParam String new_user_password) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        System.out.println("in register method!");
+        // confirm that the requested username is not already in use
+        if(userRepository.findUserByName(new_user_name) != null)
+            return "FAIL: User already exists";
+        
         User newUser = new User();
-        List<String> hashResult = hash(password);
-        newUser.setUser_name(name);
+        List<String> hashResult = hash(new_user_password);
+        newUser.setUser_name(new_user_name);
         newUser.setSalt(hashResult.get(0));
         newUser.setHash(hashResult.get(1));
         newUser.setAdmin(false);
 
-        return userRepository.saveAndFlush(newUser);
+        try {
+            userRepository.saveAndFlush(newUser);
+            return "OK: Account Created";
+        }
+        catch(Exception e) {
+            System.err.println(e);
+            return "FAIL: Failed to create account.";
+        }
     }
 
-    // TODO: remove function when done testing
+    // create new hashed password for new user
     public List<String> hash(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
         List<String> salt_hash_list = new ArrayList<String>();
         SecureRandom random = new SecureRandom();

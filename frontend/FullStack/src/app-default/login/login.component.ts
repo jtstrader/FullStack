@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
 
   sub!: Subscription;
   success: boolean = false;
+  responseCode: string = "";
   errorMessage: string = "";
 
   login(): void {
@@ -39,8 +40,11 @@ export class LoginComponent implements OnInit {
     if(this.user_name != undefined && this.password != undefined) {
       this.sub = this.loginService.login(this.user_name, this.password).subscribe({
         next: OK => {
-          this.success = OK;
-          console.log(this.success);
+          console.log(OK);
+          let rA = OK.split(" ");
+          if(rA[0] == "OK:") {
+            console.log("Login Success!");
+          }
         },
         error: err => this.errorMessage = err
       })
