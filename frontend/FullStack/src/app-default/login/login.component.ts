@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { LoginService } from '../services/login.service';
 
@@ -9,7 +10,8 @@ import { LoginService } from '../services/login.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService,
+              private router: Router) { }
 
   user_name: string | undefined;
   password: string | undefined;
@@ -44,6 +46,7 @@ export class LoginComponent implements OnInit {
           let rA = OK.split(" ");
           if(rA[0] == "OK:") {
             console.log("Login Success!");
+            this.router.navigate(["/welcome"]);
           }
         },
         error: err => this.errorMessage = err
